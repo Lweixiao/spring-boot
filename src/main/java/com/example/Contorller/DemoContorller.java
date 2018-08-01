@@ -60,7 +60,6 @@ public class DemoContorller {
         User user1= new User();
         user1.setId(user.getId());
         user1.setUserName(user.getUserName());
-//        user1.setAge(user.getAge());
         if(userRepository.save(user1)==null){
             return new Result(CodeEnum.ERROR,null);
         }
