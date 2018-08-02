@@ -4,7 +4,10 @@ import com.example.Repository.UserRepository;
 import com.example.Utils.CodeEnum;
 import com.example.Utils.Result;
 import com.example.domain.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +18,8 @@ import javax.validation.Valid;
 @RestController
 @CrossOrigin
 public class DemoContorller {
+
+    private final Logger logger = LoggerFactory.getLogger(DemoContorller.class);
 
     @Autowired
     private UserRepository userRepository;
@@ -64,5 +69,23 @@ public class DemoContorller {
         }
         return new Result(CodeEnum.SUCCESS,null);
 
+    }
+
+
+    /**
+     * 测试定时器
+     */
+    @Scheduled(cron="0 0/1 * * * ?") //每分钟执行一次
+    public void statusCheck() {
+        logger.info("每分钟执行一次。开始……");
+        //statusTask.healthCheck();
+        logger.info("每分钟执行一次。结束。");
+    }
+
+    @Scheduled(fixedRate=20000)
+    public void testTasks() {
+        logger.info("每20秒执行一次。开始……");
+        //statusTask.healthCheck();
+        logger.info("每20秒执行一次。结束。");
     }
 }
