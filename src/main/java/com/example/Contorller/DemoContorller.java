@@ -52,7 +52,6 @@ public class DemoContorller {
      * @param bindingResult 捕捉错误信息
      */
     @PostMapping( value = "/updateUser")
-
     public Result updateUser(@Valid User user, BindingResult bindingResult){
         if(bindingResult.hasErrors()){//表单验证
             return new Result(CodeEnum.PARAMETER_ERROR,null);
